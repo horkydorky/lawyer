@@ -1,5 +1,5 @@
-# Vector store
-chroma_db/
+# Vector store - commented out to include in deployment
+# chroma_db/
 chroma_db1/
 chroma_db2/
 

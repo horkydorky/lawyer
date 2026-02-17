@@ -1,16 +1,15 @@
 #!/bin/bash
 # Startup script for Render free tier
-# This will ingest data on every startup since we don't have persistent storage
 
 echo "🚀 Starting MyPocketLawyer..."
 
 # Check if chroma_db exists and has data
-if [ ! -d "/app/chroma_db" ] || [ -z "$(ls -A /app/chroma_db)" ]; then
-    echo "📚 ChromaDB not found or empty. Running data ingestion..."
-    python backend/ingest.py
-    echo "✅ Data ingestion complete!"
+if [ -d "/app/chroma_db" ] && [ -n "$(ls -A /app/chroma_db 2>/dev/null)" ]; then
+    echo "✅ ChromaDB found with data, skipping ingestion."
 else
-    echo "✅ ChromaDB found, skipping ingestion."
+    echo "⚠️  ChromaDB not found. This will cause issues on free tier due to memory limits."
+    echo "📚 Attempting data ingestion (may fail due to 512MB RAM limit)..."
+    python backend/ingest.py || echo "❌ Ingestion failed - not enough memory"
 fi
 
 # Start the FastAPI application

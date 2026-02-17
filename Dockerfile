@@ -39,8 +39,10 @@ COPY backend/ ./backend/
 COPY config/ ./config/
 # Copy processed data for ingestion
 COPY processeddata/ ./processeddata/
-# Copy ingestion script
-COPY backend/ingest.py ./backend/ingest.py
+
+# PRE-BUILD: Copy existing chroma_db if it exists (to avoid runtime ingestion)
+# This assumes you've already run ingestion locally
+COPY chroma_db/ ./chroma_db/ 2>/dev/null || echo "No pre-built chroma_db found, will build at runtime"
 
 # Copy startup script
 COPY start.sh ./start.sh
