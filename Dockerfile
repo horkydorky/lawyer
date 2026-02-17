@@ -31,8 +31,14 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy backend code
 COPY backend/ ./backend/
 COPY config/ ./config/
-# Copy ingestion script if needed at runtime
+# Copy processed data for ingestion
+COPY processeddata/ ./processeddata/
+# Copy ingestion script
 COPY backend/ingest.py ./backend/ingest.py
+
+# Copy startup script
+COPY start.sh ./start.sh
+RUN chmod +x ./start.sh
 
 # Copy built frontend assets from Stage 1
 # backend/main.py expects frontend/dist to be at ../frontend/dist relative to backend/main.py
@@ -46,6 +52,5 @@ EXPOSE 8000
 ENV PYTHONUNBUFFERED=1
 ENV PORT=8000
 
-# Run the application
-# We need to run from /app so that backend.main is importable
-CMD ["uvicorn", "backend.main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Run the application using startup script
+CMD ["./start.sh"]
