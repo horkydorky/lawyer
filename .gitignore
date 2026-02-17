@@ -1,0 +1,21 @@
+# Vector store
+chroma_db/
+chroma_db1/
+chroma_db2/
+
+# Environments
+.venv/
+venv/
+.env
+__pycache__/
+.ipynb_checkpoints/
+
+# OS & editor
+.DS_Store
+*.log
+token.pickle
+*.pickle
+client_secret_800648931401-m6spk0c3h53d17qtss63v8pd8kmp8t6f.apps.googleusercontent.com.json
+
+# Data Directory
+data/

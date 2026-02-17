@@ -1,0 +1,26 @@
+# Core Backend
+fastapi>=0.110.0
+uvicorn>=0.27.1
+python-dotenv>=1.0.1
+pydantic>=2.6.3
+pydantic-settings>=2.2.1
+
+# AI & LLM
+google-genai>=0.3.0
+chromadb>=0.4.24
+langchain>=0.1.12
+langchain-community>=0.0.28
+langchain-core>=0.1.33
+langchain-text-splitters>=0.0.1
+langchain-chroma>=0.1.2
+langchain-huggingface>=0.0.3
+
+# Data Processing
+pymupdf>=1.24.0
+tqdm>=4.66.2
+sentence-transformers>=2.5.1
+torch>=2.2.1
+
+# Utilities
+click>=8.1.7
+requests>=2.31.0
