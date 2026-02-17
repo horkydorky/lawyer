@@ -40,9 +40,8 @@ COPY config/ ./config/
 # Copy processed data for ingestion
 COPY processeddata/ ./processeddata/
 
-# PRE-BUILD: Copy existing chroma_db if it exists (to avoid runtime ingestion)
-# This assumes you've already run ingestion locally
-COPY chroma_db/ ./chroma_db/ 2>/dev/null || echo "No pre-built chroma_db found, will build at runtime"
+# Copy pre-built chroma_db (make sure it's committed to git)
+COPY chroma_db/ ./chroma_db/
 
 # Copy startup script
 COPY start.sh ./start.sh
