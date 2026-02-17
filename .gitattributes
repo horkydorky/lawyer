@@ -1,0 +1,2 @@
+# Ensure shell scripts use LF line endings (Unix style) even on Windows
+*.sh text eol=lf
