@@ -135,9 +135,9 @@ After deployment completes:
 ## 🎯 Quick Reference
 
 ### Your Configuration
-- GitHub Repo: `https://github.com/_______________/_______________`
-- Render Service: `https://_______________.onrender.com`
-- API Endpoint: `https://_______________.onrender.com/chat`
+- GitHub Repo: `https://github.com/horkydorky/lawyer`
+- Render Service: `https://mypocketlawyer.onrender.com` (will be assigned by Render)
+- API Endpoint: `https://mypocketlawyer.onrender.com/chat`
 
 ### Useful Commands
 ```bash
