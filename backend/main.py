@@ -45,20 +45,26 @@ class ChatRequest(BaseModel):
 
 
 # ---------- Embedding helper ----------
-from langchain_huggingface import HuggingFaceEmbeddings
+# Lazy-load embedding model to reduce startup memory usage
+embedding_model = None
 
-# ---------- Embedding helper ----------
-# Must match ingestion: BAAI/bge-large-en-v1.5 on CPU
-print("🔄 Loading embedding model on CPU...")
-embedding_model = HuggingFaceEmbeddings(
-    model_name="BAAI/bge-large-en-v1.5",
-    model_kwargs={'device': 'cpu'},
-    encode_kwargs={'normalize_embeddings': True}
-)
+def get_embedding_model():
+    """Lazy-load the embedding model only when needed"""
+    global embedding_model
+    if embedding_model is None:
+        print("🔄 Loading embedding model on CPU...")
+        from langchain_huggingface import HuggingFaceEmbeddings
+        embedding_model = HuggingFaceEmbeddings(
+            model_name="BAAI/bge-large-en-v1.5",
+            model_kwargs={'device': 'cpu'},
+            encode_kwargs={'normalize_embeddings': True}
+        )
+    return embedding_model
 
 def get_query_embedding(text: str):
     # Use the local model to get query embedding
-    return embedding_model.embed_query(text)
+    model = get_embedding_model()
+    return model.embed_query(text)
 
 
 # ---------- Small-talk guard ----------
